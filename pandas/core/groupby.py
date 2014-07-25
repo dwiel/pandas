@@ -427,17 +427,7 @@ class GroupBy(PandasObject):
             return key
 
         sample = next(iter(self.indices))
-        if isinstance(sample, tuple):
-            if not isinstance(name, tuple):
-                raise ValueError("must supply a tuple to get_group with multiple grouping keys")
-            if not len(name) == len(sample):
-                raise ValueError("must supply a a same-length tuple to get_group with multiple grouping keys")
-
-            name = tuple([ convert(n, k) for n, k in zip(name,sample) ])
-
-        else:
-
-            name = convert(name, sample)
+        name = convert(name, sample)
 
         return self.indices[name]
 
